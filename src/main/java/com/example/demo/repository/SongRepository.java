@@ -13,9 +13,6 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     @Query(value = "SELECT * FROM Song ORDER BY RAND() LIMIT 3", nativeQuery = true)
     List<Song> findTop3Random();
-
-
-
     List<Song> findByNameContainingIgnoreCase(String name);
 
 }

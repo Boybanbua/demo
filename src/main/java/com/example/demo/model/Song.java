@@ -8,6 +8,7 @@ public class Song {
 
     public Song() {
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,29 +18,37 @@ public class Song {
     private String author;
     private String category;
     private String description;
-    private int view ;
+    private int view;
+
+
+    @ManyToOne
+    @JoinColumn(name = "playlist_id")
+    private Playlist playlist;
 
     public Song(String name, String link) {
         this.name = name;
         this.link = link;
     }
 
-    public String getCover() {
-        return cover;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setFileName(String name) {
-        this.name = name;
-    }
+    // Getters và setters
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setFileName(String name) {
         this.name = name;
     }
 
@@ -51,33 +60,52 @@ public class Song {
         this.link = link;
     }
 
-    public void setCover(String s) {
-        this.cover = s;
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getAuthor() {
         return author;
     }
+
     public void setAuthor(String author) {
         this.author = author;
     }
+
     public String getCategory() {
         return category;
     }
+
     public void setCategory(String category) {
         this.category = category;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public int getView() {
         return view;
     }
+
     public void setView(int view) {
         this.view = view;
     }
 
+
+    public Playlist getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(Playlist playlist) {
+        this.playlist = playlist;
+    }
 }

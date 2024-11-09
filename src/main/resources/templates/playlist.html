@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Playlist</title>
+    <link rel="stylesheet" href="/css/listen.css">
+</head>
+<body>
+<div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+        <li><a href="/songs" style="color: white;">Songs</a></li>
+        <li><a href="/upload" style="color: white;">Upload</a></li>
+        <li><a href="/media" style="color: white;">Media</a></li>
+        <li><a href="/playlist" style="color: white;">Playlist</a></li>
+    </ul>
+</div>
+
+<div id="content" class="content">
+    <h1>Playlist</h1>
+
+    <!-- Search box -->
+    <label for="searchInput"></label>
+    <input type="text" id="searchInput" placeholder="Search for songs..." style="width:90%; padding: 10px; margin-bottom: 10px;">
+
+
+    <div class="playlist">
+        <div th:each="playlist : ${playlists}">
+            <div class="playlist-item" style="margin: 20px 0;">
+                <h3 th:text="${playlist.name}">Playlist Name</h3>
+                <div th:each="song : ${playlist.songs}">
+                    <div class="song-item" style="display: flex; align-items: center; margin: 10px 0;">
+                        <div class="song-cover" th:style="'background-image: url(' + @{${song.cover}} + '); width: 50px; height: 50px; background-size: cover; margin-right: 10px;" onclick="playSong(${song.link}, ${song.cover})"></div>
+                        <span th:text="${song.name}">Song Name</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="now-playing">
+    <div class="cover-container">
+        <img id="cover-image" class="cover-image" src="" alt="Cover Image">
+    </div>
+    <audio id="audio-player" controls style="width: 100%; margin-top: 20px;">
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <canvas id="audioVisualizer"></canvas>
+</div>
+
+<script src="/js/scripts.js"></script>
+<script src="/js/visualizer.js"></script>
+<script src="/js/searchsong.js"></script>
+<script>
+    // Hàm playSong để phát nhạc khi người dùng click vào bài hát
+    function playSong(songLink, coverImage) {
+        document.getElementById('audio-player').src = songLink;
+        document.getElementById('cover-image').src = coverImage;
+        document.getElementById('audio-player').play();
+    }
+
+</script>
+</body>
+</html>

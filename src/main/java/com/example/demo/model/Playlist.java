@@ -1,31 +1,37 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
+
+import jakarta.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Playlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;  
+    private Long id;
 
+    private String link;
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "playlist_song",
-            joinColumns = @JoinColumn(name = "playlist_id"),
-            inverseJoinColumns = @JoinColumn(name = "song_id"))
+    // Liên kết một-nhiều với các bài hát
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Song> songs;
 
-    // Getters và Setters
-    public Integer getId() {
+    // Getters và setters
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getName() {
@@ -42,5 +48,15 @@ public class Playlist {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
+    }
+
+    public void addSong(Song song) {
+        songs.add(song);
+        song.setPlaylist(this); // Đặt playlist cho bài hát
+    }
+
+    public void removeSong(Song song) {
+        songs.remove(song);
+        song.setPlaylist(null); // Hủy liên kết playlist của bài hát
     }
 }

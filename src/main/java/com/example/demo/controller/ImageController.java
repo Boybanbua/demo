@@ -39,6 +39,7 @@ public class ImageController {
         return "media";
     }
 
+
     @PostMapping("/uploadImage")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         try {

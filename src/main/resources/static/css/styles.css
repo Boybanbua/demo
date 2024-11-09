@@ -68,3 +68,7 @@ button:hover {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.audioVisualizerContainer {
+    position: relative; /* Đặt relative để dễ dàng điều chỉnh */
+    margin-top: 50%; /* Điều chỉnh giá trị này để di chuyển xuống dưới */
+}

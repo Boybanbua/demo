@@ -21,7 +21,6 @@ function setupAudioVisualizer(audioElement, canvasElement) {
         const barWidth = (canvasElement.width / bufferLength) * 2.5;
         let barHeight;
         let x = 0;
-
         for (let i = 0; i < bufferLength; i++) {
             barHeight = dataArray[i] / 2;
 
@@ -46,7 +45,6 @@ function setupAudioVisualizer(audioElement, canvasElement) {
 
 
     }
-
 
     audioElement.addEventListener('play', () => {
         audioContext.resume(); // Ensure audio context is activated

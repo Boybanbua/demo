@@ -61,6 +61,7 @@ public class SongController {
             Song song = new Song();
             song.setLink("uploads/" + fileName); // Giữ nguyên file nhạc với đuôi gốc
             song.setFileName(fileName); // Lưu tên gốc của file nhạc
+
             song.setCover("uploads/" + baseName + ".gif"); // Đổi đuôi ảnh thành .jpg
 
             songRepository.save(song);
